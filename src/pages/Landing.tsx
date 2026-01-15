@@ -2,8 +2,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { User, Briefcase, Database, Brain, ShieldCheck, Search,  TrendingUp, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { User, Briefcase, Database, Brain, ShieldCheck, Search,  TrendingUp, ArrowRight, CheckCircle2, Wand, MapPin, Target } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import FAQItem from '../components/FAQItem';
 
 const Landing: React.FC = () => {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ const Landing: React.FC = () => {
   return (
     <div className="bg-white overflow-hidden">
       {/* Hero Section */}
-      <section className="relative pt-20 pb-16 lg:pt-32 lg:pb-24 px-4 overflow-hidden">
+      <section className="relative pt-20 pb-16 lg:pt-22 lg:pb-20 px-4 overflow-hidden">
         {/* Subtle background glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full -z-10 overflow-hidden pointer-events-none">
           <div className="absolute top-0 right-0 w-96 h-96 bg-blue-50 rounded-full blur-3xl opacity-50 translate-x-1/2 -translate-y-1/2"></div>
@@ -26,14 +27,6 @@ const Landing: React.FC = () => {
         </div>
 
         <div className="max-w-7xl mx-auto text-center">
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="inline-flex items-center px-3 py-1 rounded-full bg-blue-50 border border-blue-100 mb-6"
-          >
-            <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse mr-2"></span>
-            <span className="text-xs font-semibold text-blue-700 uppercase tracking-wider">{t('landing.badge')}</span>
-          </motion.div>
           
           <motion.h1 
             {...fadeInUp}
@@ -91,41 +84,45 @@ const Landing: React.FC = () => {
         </div>
       </section>
 
-      {/* Why This Model? Section */}
-      <section className="py-24 bg-white px-4">
+      
+      <section className="pt-10 pb-24 bg-white px-4">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-            <div>
-              <h2 className="text-4xl font-bold text-slate-900 mb-4 tracking-tight">{t('landing.whyTitle')}</h2>
-              <p className="text-slate-500 text-lg">{t('landing.whySubtitle')}</p>
+           <div className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div
+              className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 group transition-transform duration-300 ease-out hover:-translate-y-2 hover:shadow-lg hover:border-blue-100"
+           >
+              <div
+                className="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 mb-6 text-2xl transition-colors group-hover:bg-blue-600 group-hover:text-white"
+              >
+                <Wand size={24} />
+              </div>
+              <h3 className="text-xl font-bold mb-3 text-slate-900">Prédiction IA</h3>
+              <p className="text-slate-600 leading-relaxed">Estimation précise des salaires basée sur l'analyse NLP des descriptions de postes.</p>
             </div>
-            <a href="#" className="text-blue-600 font-semibold flex items-center hover:underline">
-              {t('landing.whitepaper')} <ArrowRight size={18} className="ml-2" />
-            </a>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <FeatureCard 
-              icon={<Database className="text-blue-600" size={24} />}
-              title={t('landing.feature1Title')}
-              description={t('landing.feature1Desc')}
-              footer="Market Coverage"
-              footerColor="blue"
-            />
-            <FeatureCard 
-              icon={<Brain className="text-white" size={24} />}
-              title={t('landing.feature2Title')}
-              description={t('landing.feature2Desc')}
-              dark
-              tags={['spaCy', 'BERT', 'LLM']}
-            />
-            <FeatureCard 
-              icon={<ShieldCheck className="text-blue-600" size={24} />}
-              title={t('landing.feature3Title')}
-              description={t('landing.feature3Desc')}
-              footer="99.8% Accuracy"
-              footerColor="blue"
-            />
+            <div
+              className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 group transition-transform duration-300 ease-out hover:-translate-y-2 hover:shadow-lg hover:border-slate-200"
+            >
+              <div
+                className="w-14 h-14 bg-slate-50 rounded-xl flex items-center justify-center text-slate-900 mb-6 text-2xl transition-colors group-hover:bg-slate-900 group-hover:text-white"
+              >
+                <MapPin size={24} />
+              </div>
+              <h3 className="text-xl font-bold mb-3 text-slate-900">Cartographie</h3>
+              <p className="text-slate-600 leading-relaxed">Visualisez les zones géographiques les plus attractives pour votre secteur d'activité.</p>
+            </div>
+
+            <div
+              className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 group transition-transform duration-300 ease-out hover:-translate-y-2 hover:shadow-lg hover:border-blue-100"
+            >
+              <div
+                className="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center text-blue-700 mb-6 text-2xl transition-colors group-hover:bg-blue-600 group-hover:text-white"
+              >
+                <Target size={24} />
+              </div>
+              <h3 className="text-xl font-bold mb-3 text-slate-900">Skills Hub</h3>
+              <p className="text-slate-600 leading-relaxed">Identifiez les compétences rares et débloquez votre potentiel de gain.</p>
+            </div>
           </div>
         </div>
       </section>
@@ -198,22 +195,48 @@ const Landing: React.FC = () => {
         </div>
       </section>
 
-      {/* Engineered for Clarity Section */}
+      
+      
+            {/* FAQ Section */}
       <section className="py-24 px-4 bg-white text-center overflow-hidden">
-        <h2 className="text-4xl font-bold text-slate-900 mb-4 tracking-tight">{t('landing.engineeredTitle')}</h2>
-        <p className="text-slate-500 text-lg mb-16 max-w-xl mx-auto">{t('landing.engineeredDesc')}</p>
-        
-        <div className="max-w-4xl mx-auto relative group">
-          <div className="absolute inset-0 bg-blue-600/5 blur-3xl rounded-full scale-110 -z-10 group-hover:scale-125 transition-transform duration-700"></div>
-          <div className="bg-white rounded-[2rem] border border-slate-100 shadow-2xl p-4 overflow-hidden">
-             <img 
-               src="https://picsum.photos/seed/dashboard/1200/800" 
-               alt="Dashboard Preview" 
-               className="rounded-2xl w-full h-auto"
-             />
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-slate-900 mb-4 tracking-tight">{t('faq.title')}</h2>
+            <p className="text-slate-500 text-lg">{t('faq.subtitle')}</p>
+          </div>
+
+          <div className="space-y-4">
+            <FAQItem 
+              question={t('faq.q1')}
+              answer={t('faq.a1')}
+            />
+            <FAQItem 
+              question={t('faq.q2')}
+              answer={t('faq.a2')}
+            />
+            <FAQItem 
+              question={t('faq.q3')}
+              answer={t('faq.a3')}
+            />
+            <FAQItem 
+              question={t('faq.q4')}
+              answer={t('faq.a4')}
+            />
+            <FAQItem 
+              question={t('faq.q5')}
+              answer={t('faq.a5')}
+            />
+          </div>
+
+          <div className="mt-12 text-center">
+            <p className="text-slate-600 mb-4">{t('faq.more')}</p>
+            <button className="text-blue-600 font-semibold hover:underline flex items-center justify-center mx-auto">
+              {t('faq.viewAll')} <ArrowRight size={18} className="ml-2" />
+            </button>
           </div>
         </div>
       </section>
+      
     </div>
   );
 };
@@ -261,3 +284,8 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description, dar
 };
 
 export default Landing;
+/*
+<section className="py-24 px-4 bg-white text-center overflow-hidden">
+</section>
+
+*/
