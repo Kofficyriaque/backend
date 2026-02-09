@@ -26,7 +26,9 @@ const FlagEN = () => (
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
-  const [currentLang, setCurrentLang] = useState<'FR' | 'EN'>('FR');
+  const [currentLang, setCurrentLang] = useState<'FR' | 'EN'>(() => 
+    i18n.language.startsWith('fr') ? 'FR' : 'EN'
+  );
   const langRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -49,10 +51,6 @@ const Navbar: React.FC = () => {
   ];
 
   const currentLanguageData = languages.find(l => l.code === currentLang);
-  useEffect(() => {
-    const current = i18n.language.startsWith('fr') ? 'FR' : 'EN';
-    setCurrentLang(current);
-  }, []);
 
   const onChangeLanguage = (code: 'FR' | 'EN') => {
     const lng = code === 'FR' ? 'fr' : 'en';
@@ -75,7 +73,7 @@ const Navbar: React.FC = () => {
           <div className="hidden md:flex items-center space-x-8">
             <Link to="/" className="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">{t('navbar.ourMission')}</Link>
             <Link to="/candidat" className="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">{t('navbar.forCandidates')}</Link>
-            <Link to="/" className="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">{t('navbar.forRecruiters')}</Link>
+            <Link to="/recruteur" className="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">{t('navbar.forRecruiters')}</Link>
             <div className="flex items-center space-x-4 pl-4 border-l border-slate-200">
               {/* Language Switcher Desktop */}
               <div className="relative mr-2" ref={langRef}>
@@ -146,7 +144,7 @@ const Navbar: React.FC = () => {
           <div className="px-4 pt-2 pb-6 space-y-3">
             <Link to="/" className="block text-base font-medium text-slate-600 hover:text-blue-600 py-2">{t('navbar.ourMission')}</Link>
             <Link to="/candidat" className="block text-base font-medium text-slate-600 hover:text-blue-600 py-2">{t('navbar.forCandidates')}</Link>
-            <Link to="/" className="block text-base font-medium text-slate-600 hover:text-blue-600 py-2">{t('navbar.forRecruiters')}</Link>
+            <Link to="/recruteur" className="block text-base font-medium text-slate-600 hover:text-blue-600 py-2">{t('navbar.forRecruiters')}</Link>
             
             <div className="pt-4 flex flex-col space-y-3">
               <div className="flex items-center justify-between py-2 border-t border-slate-50">
