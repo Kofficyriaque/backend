@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+mysql-connector-python
+pydantic[email]
+PyJWT
+pandas
+scikit-learn
+xgboost
+python-dotenv
+
