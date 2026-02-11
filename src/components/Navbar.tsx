@@ -71,7 +71,7 @@ const Navbar: React.FC = () => {
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link to="/" className="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">{t('navbar.ourMission')}</Link>
+            <Link to="/about" className="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">{t('navbar.forAbout')}</Link>
             <Link to="/candidat" className="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">{t('navbar.forCandidates')}</Link>
             <Link to="/recruteur" className="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">{t('navbar.forRecruiters')}</Link>
             <div className="flex items-center space-x-4 pl-4 border-l border-slate-200">

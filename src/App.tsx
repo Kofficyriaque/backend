@@ -7,8 +7,9 @@ import Candidat from './pages/Candidat';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Recruteur from './pages/Recruteur';
-import Signup from './pages/Singup';
+import Singup from './pages/Singup';
 import ForgotPassword from './pages/ForgotPassword';
+import About from './pages/About';
 
 
 
@@ -20,9 +21,10 @@ const App: React.FC = () => {
         <main className="flex-grow pt-16">
           <Routes>
             <Route path="/" element={<Landing />} />
+            <Route path="about" element={<About />} />
             <Route path="/login" element={<Login />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/signup" element={<Signup />} />
+            <Route path="/signup" element={<Singup />} />
             <Route path="/onboarding/candidate" element={<CandidateOnboarding />} />
             <Route path="/candidat" element={<Candidat />} />
             <Route path="/recruteur" element={<Recruteur />} />

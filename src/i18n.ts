@@ -5,7 +5,7 @@ const resources = {
   en: {
     translation: {
       navbar: {
-        ourMission: 'Our Mission',
+        forAbout: 'About',
         forCandidates: 'Candidate',
         forRecruiters: 'Recruiter',
         login: 'Log In',
@@ -166,22 +166,40 @@ const resources = {
         rec_final_title: "Get an edge in the job market.",
         rec_final_cta: "Launch an Audit now"
       },
-      faq: {
-        title: "FAQ",
-        subtitle: "Everything you need to know about PrediSalaire",
-        q1: "What is PrediSalaire?",
-        a1: "PrediSalaire is an artificial intelligence platform that analyzes millions of job offers in real-time to predict IT salaries with 99.8% accuracy. Our NLP engine gives you access to market truth, without human bias.",
-        q2: "How does salary prediction work?",
-        a2: "Our AI automatically collects data from 50+ job platforms, analyzes it using NLP algorithms (NLTK, scikit-learn), then generates an estimate based on your profile, skills, experience, and location.",
-        q3: "Is PrediSalaire free?",
-        a3: "Yes! Candidates can get a free salary estimate. Recruiters have access to a free basic dashboard, with premium features available for advanced benchmarking.",
-        q4: "How accurate are the estimates?",
-        a4: "Our model achieves 99.8% accuracy by analyzing 50 million offers. However, salaries also depend on non-quantifiable factors like negotiation and benefits.",
-        q5: "Is my personal data secure?",
-        a5: "Absolutely. We comply with GDPR and never share your information with third parties. Your data is encrypted and you can delete it at any time.",
-        more: "Have more questions?",
-        viewAll: "View all questions",
-      },
+      about: {
+        pres_tag: "About the Project",
+        pres_hero_title: "Market Intelligence <br/>Brought to Light.",
+        pres_intro_p1: "This platform was designed to meet the current challenges of the job market, in particular the understanding of salaries and the most sought-after skills.",
+        pres_middle_intro: "In a context where job offers and profiles evolve rapidly, it becomes essential to have tools capable of analyzing market trends and providing reliable estimates. Our solution relies on data analysis and artificial intelligence techniques to transform complex information into clear and actionable indicators.",
+        
+        pres_audience_title: "One Platform for Two Audiences",
+        pres_candidate_full: "Job seekers can estimate their potential salary from a job description, compare market compensation levels, and identify the most valued skills in their field. This information allows them to better position themselves, guide their professional path, and prepare their applications more effectively.",
+        pres_recruiter_full: "Recruiters and human resources professionals have analytical tools to observe salary trends, evaluate the competitiveness of their offers, and better understand market expectations. The platform thus facilitates decision-making regarding recruitment and the attractiveness of job ads.",
+        
+        pres_vision_p1: "By putting artificial intelligence at the service of job market analysis, this project aims to propose an accessible, informative, and decision-oriented solution, both for candidates and recruiters.",
+        pres_vision_p2: "Our platform offers a new approach to job market analysis, centered on understanding salaries and skills. Thanks to intelligent data exploitation, it provides salary estimates and market indicators adapted to current realities, particularly in digital professions.",
+        pres_vision_p3: "Candidates can better evaluate their market position, identify high value-added skills, and make informed decisions for their professional development. On their side, recruiters benefit from a global vision of salary trends and sought-after profiles, allowing them to optimize their job offers and improve their attractiveness.",
+        
+        pres_final_word: "This project illustrates the contribution of artificial intelligence in job market analysis, making information more readable, accessible, and useful for everyone.",
+
+        pres_tech_stack: "Python • JS • SQL • ML (Scikit-Learn) • NLP",
+          },
+          faq: {
+            title: "FAQ",
+            subtitle: "Everything you need to know about PrediSalaire",
+            q1: "What is PrediSalaire?",
+            a1: "PrediSalaire is an artificial intelligence platform that analyzes millions of job offers in real-time to predict IT salaries with 99.8% accuracy. Our NLP engine gives you access to market truth, without human bias.",
+            q2: "How does salary prediction work?",
+            a2: "Our AI automatically collects data from 50+ job platforms, analyzes it using NLP algorithms (NLTK, scikit-learn), then generates an estimate based on your profile, skills, experience, and location.",
+            q3: "Is PrediSalaire free?",
+            a3: "Yes! Candidates can get a free salary estimate. Recruiters have access to a free basic dashboard, with premium features available for advanced benchmarking.",
+            q4: "How accurate are the estimates?",
+            a4: "Our model achieves 99.8% accuracy by analyzing 50 million offers. However, salaries also depend on non-quantifiable factors like negotiation and benefits.",
+            q5: "Is my personal data secure?",
+            a5: "Absolutely. We comply with GDPR and never share your information with third parties. Your data is encrypted and you can delete it at any time.",
+            more: "Have more questions?",
+            viewAll: "View all questions",
+          },
       login: {
         title: 'Welcome back',
         subtitle: "Access the market's most accurate salary engine.",
@@ -286,7 +304,7 @@ const resources = {
   fr: {
     translation: {
       navbar: {
-        ourMission: 'Notre mission',
+        forAbout: 'À propos',
         forCandidates: 'Candidat',
         forRecruiters: 'Recruteur',
         login: 'Se connecter',
@@ -538,6 +556,26 @@ const resources = {
         rec_attract_cta: "Tester ma première annonce",
         rec_final_title: "Prenez l'avantage sur le marché de l'emploi.",
         rec_final_cta: "Lancer un Audit maintenant"
+      },
+      apropos: {
+        // Presentation Page
+    
+    pres_hero_title: "L'intelligence du marché <br/>en pleine lumière.",
+    pres_intro_p1: "Cette plateforme a été conçue pour répondre aux enjeux actuels du marché de l’emploi, en particulier la compréhension des salaires et des compétences les plus recherchées.",
+
+    pres_middle_intro: "Dans un contexte où les offres d'emploi et les profils évoluent rapidement, il devient essentiel de disposer d'outils capables d'analyser les tendances du marché et de fournir des estimations fiables. Notre solution s'appuie sur des techniques d'analyse de données et d'intelligence artificielle afin de transformer des informations complexes en indicateurs clairs et exploitables.",
+    
+    pres_audience_title: "Une plateforme pour deux publics",
+    pres_candidate_full: "Les chercheurs d’emploi peuvent estimer leur salaire potentiel à partir d’une description de poste, comparer les niveaux de rémunération sur le marché et identifier les compétences les plus valorisées selon leur domaine. Ces informations leur permettent de mieux se positionner, d’orienter leur parcours professionnel et de préparer plus efficacement leurs candidatures.",
+    pres_recruiter_full: "Les recruteurs et professionnels des ressources humaines disposent, quant à eux, d’outils d’analyse leur permettant d’observer les tendances salariales, d’évaluer la compétitivité de leurs offres et de mieux comprendre les attentes du marché. La plateforme facilite ainsi la prise de décision en matière de recrutement et d’attractivité des annonces.",
+    
+    pres_vision_p1: "En mettant l’intelligence artificielle au service de l’analyse du marché de l’emploi, ce projet vise à proposer une solution accessible, informative et orientée vers l’aide à la décision, aussi bien pour les candidats que pour les recruteurs.",
+    pres_vision_p2: "Notre plateforme propose une nouvelle approche de l’analyse du marché de l’emploi, centrée sur la compréhension des salaires et des compétences. Grâce à l’exploitation intelligente des données, elle permet de fournir des estimations salariales et des indicateurs de marché adaptés aux réalités actuelles, notamment dans les métiers du numérique.",
+    pres_vision_p3: "Les candidats peuvent mieux évaluer leur position sur le marché, identifier les compétences à forte valeur ajoutée et prendre des décisions éclairées pour leur évolution professionnelle. De leur côté, les recruteurs bénéficient d’une vision globale des tendances salariales et des profils recherchés, leur permettant d’optimiser leurs offres d’emploi et d’améliorer leur attractivité.",
+    
+    pres_final_word: "Ce projet illustre l’apport de l’intelligence artificielle dans l’analyse du marché de l’emploi, en rendant l’information plus lisible, plus accessible et plus utile pour tous.",
+
+    pres_tech_stack: "Python • JS • SQL • ML (Scikit-Learn) • NLP",
       },
       footer: {
         about:
