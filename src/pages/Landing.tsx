@@ -1,8 +1,8 @@
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { User, Briefcase, Database, Brain, ShieldCheck, Search,  TrendingUp, ArrowRight, CheckCircle2, Wand, MapPin, Target } from 'lucide-react';
+import { User, Briefcase, Search, TrendingUp, ArrowRight, CheckCircle2, Wand, MapPin, Target } from 'lucide-react';
+
 import { useTranslation } from 'react-i18next';
 import FAQItem from '../components/FAQItem';
 
@@ -10,187 +10,157 @@ const Landing: React.FC = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const fadeInUp = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6 }
-  };
-
   return (
-    <div className="bg-white overflow-hidden">
+    <div className="bg-white dark:bg-slate-950 overflow-hidden">
       {/* Hero Section */}
-      <section className="relative pt-20 pb-16 lg:pt-22 lg:pb-20 px-4 overflow-hidden">
-        {/* Subtle background glow */}
+      <section className="relative pt-32 pb-24 px-6">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full -z-10 overflow-hidden pointer-events-none">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-blue-50 rounded-full blur-3xl opacity-50 translate-x-1/2 -translate-y-1/2"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-slate-50 rounded-full blur-3xl opacity-50 -translate-x-1/2 translate-y-1/2"></div>
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-50 dark:bg-blue-900/10 rounded-full blur-3xl opacity-60 translate-x-1/3 -translate-y-1/3"></div>
+          <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-50 dark:bg-slate-900/50 rounded-full blur-3xl opacity-40 -translate-x-1/3 translate-y-1/3"></div>
         </div>
 
         <div className="max-w-7xl mx-auto text-center">
-          
-          <motion.h1 
-            {...fadeInUp}
-            className="text-5xl md:text-7xl font-bold text-slate-900 tracking-tight leading-[1.1] mb-6"
-          >
+          <h1 className="text-5xl md:text-8xl font-black text-slate-900 dark:text-white tracking-tighter leading-[0.9] mb-8">
             {t('landing.titleLine1')}<br />
-            <span className="text-blue-600">{t('landing.titleLine2')}</span>
-          </motion.h1>
+            <span className="text-blue-600 dark:text-blue-500">{t('landing.titleLine2')}</span>
+          </h1>
           
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            className="max-w-2xl mx-auto text-lg md:text-xl text-slate-500 mb-12"
-          >
+          <p className="max-w-2xl mx-auto text-xl text-slate-500 dark:text-slate-400 mb-16 font-medium italic">
             {t('landing.subtitle')}
-          </motion.p>
+          </p>
 
-          {/* Hero CTAs */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto px-4">
             {/* Candidate Card */}
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+            <button
               onClick={() => navigate('/onboarding/candidate')}
-              className="relative group bg-blue-600 text-white p-8 rounded-[2rem] text-left overflow-hidden shadow-xl shadow-blue-200"
+              className="relative group bg-blue-600 text-white p-12 rounded-[3rem] text-left overflow-hidden shadow-2xl hover:-translate-y-2 transition-all duration-500"
             >
               <div className="relative z-10">
-                <span className="text-xs font-bold uppercase tracking-widest text-blue-100 opacity-80 mb-2 block">{t('landing.candidateBadge')}</span>
-                <h3 className="text-2xl font-bold mb-4">{t('landing.candidateTitle')}</h3>
-                <div className="flex items-center text-sm font-semibold text-blue-100 group-hover:translate-x-1 transition-transform">
-                  {t('landing.candidateCta')} <ArrowRight size={16} className="ml-2" />
+                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-100/70 mb-4 block">{t('landing.candidateBadge')}</span>
+                <h3 className="text-3xl font-black mb-6 leading-tight">{t('landing.candidateTitle')}</h3>
+                <div className="flex items-center text-sm font-black uppercase tracking-widest text-white group-hover:translate-x-2 transition-transform">
+                  {t('landing.candidateCta')} <ArrowRight size={18} className="ml-3" />
                 </div>
               </div>
-              <User className="absolute right-[-10px] bottom-[-10px] w-32 h-32 text-white/10 group-hover:scale-110 transition-transform duration-500" />
-            </motion.button>
+              <User className="absolute right-[-20px] bottom-[-20px] w-48 h-48 text-white/10 group-hover:scale-110 transition-transform duration-700" />
+            </button>
 
             {/* Recruiter Card */}
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+            <button
               onClick={() => navigate('/login')}
-              className="relative group bg-slate-900 text-white p-8 rounded-[2rem] text-left overflow-hidden shadow-xl shadow-slate-200"
+              className="relative group bg-slate-900 dark:bg-slate-800 text-white p-12 rounded-[3rem] text-left overflow-hidden shadow-2xl hover:-translate-y-2 transition-all duration-500"
             >
               <div className="relative z-10">
-                <span className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2 block">{t('landing.recruiterBadge')}</span>
-                <h3 className="text-2xl font-bold mb-4">{t('landing.recruiterTitle')}</h3>
-                <div className="flex items-center text-sm font-semibold text-slate-300 group-hover:translate-x-1 transition-transform">
-                  {t('landing.recruiterCta')} <ArrowRight size={16} className="ml-2" />
+                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-4 block">{t('landing.recruiterBadge')}</span>
+                <h3 className="text-3xl font-black mb-6 leading-tight">{t('landing.recruiterTitle')}</h3>
+                <div className="flex items-center text-sm font-black uppercase tracking-widest text-slate-300 group-hover:translate-x-2 transition-transform">
+                  {t('landing.recruiterCta')} <ArrowRight size={18} className="ml-3" />
                 </div>
               </div>
-              <Briefcase className="absolute right-[-10px] bottom-[-10px] w-32 h-32 text-white/5 group-hover:scale-110 transition-transform duration-500" />
-            </motion.button>
+              <Briefcase className="absolute right-[-20px] bottom-[-20px] w-48 h-48 text-white/5 group-hover:scale-110 transition-transform duration-700" />
+            </button>
           </div>
         </div>
       </section>
 
       
-      <section className="pt-10 pb-24 bg-white px-4">
+      {/* Feature Icons Section */}
+      <section className="py-24 bg-white dark:bg-slate-950 px-6 transition-colors">
         <div className="max-w-7xl mx-auto">
-           <div className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div
-              className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 group transition-transform duration-300 ease-out hover:-translate-y-2 hover:shadow-lg hover:border-blue-100"
-           >
-              <div
-                className="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 mb-6 text-2xl transition-colors group-hover:bg-blue-600 group-hover:text-white"
-              >
-                <Wand size={24} />
+           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div className="bg-slate-50 dark:bg-slate-900 p-10 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 group hover:border-blue-200 dark:hover:border-blue-700 transition-all">
+              <div className="w-16 h-16 bg-blue-50 dark:bg-blue-950/50 rounded-2xl flex items-center justify-center text-blue-600 dark:text-blue-400 mb-8 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+                <Wand size={28} />
               </div>
-              <h3 className="text-xl font-bold mb-3 text-slate-900">Prédiction IA</h3>
-              <p className="text-slate-600 leading-relaxed">Estimation précise des salaires basée sur l'analyse NLP des descriptions de postes.</p>
+              <h3 className="text-2xl font-black mb-4 text-slate-900 dark:text-white tracking-tight">Prédiction IA</h3>
+              <p className="text-slate-500 dark:text-slate-400 font-medium leading-relaxed italic">Estimation précise des salaires basée sur l'analyse NLP des descriptions de postes.</p>
             </div>
 
-            <div
-              className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 group transition-transform duration-300 ease-out hover:-translate-y-2 hover:shadow-lg hover:border-slate-200"
-            >
-              <div
-                className="w-14 h-14 bg-slate-50 rounded-xl flex items-center justify-center text-slate-900 mb-6 text-2xl transition-colors group-hover:bg-slate-900 group-hover:text-white"
-              >
-                <MapPin size={24} />
+            <div className="bg-slate-50 dark:bg-slate-900 p-10 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 group hover:border-slate-300 dark:hover:border-slate-700 transition-all">
+              <div className="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-2xl flex items-center justify-center text-slate-900 dark:text-slate-100 mb-8 transition-colors group-hover:bg-slate-950 dark:group-hover:bg-white group-hover:text-white dark:group-hover:text-slate-950">
+                <MapPin size={28} />
               </div>
-              <h3 className="text-xl font-bold mb-3 text-slate-900">Cartographie</h3>
-              <p className="text-slate-600 leading-relaxed">Visualisez les zones géographiques les plus attractives pour votre secteur d'activité.</p>
+              <h3 className="text-2xl font-black mb-4 text-slate-900 dark:text-white tracking-tight">Cartographie</h3>
+              <p className="text-slate-500 dark:text-slate-400 font-medium leading-relaxed italic">Visualisez les zones géographiques les plus attractives pour votre secteur d'activité.</p>
             </div>
 
-            <div
-              className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 group transition-transform duration-300 ease-out hover:-translate-y-2 hover:shadow-lg hover:border-blue-100"
-            >
-              <div
-                className="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center text-blue-700 mb-6 text-2xl transition-colors group-hover:bg-blue-600 group-hover:text-white"
-              >
-                <Target size={24} />
+            <div className="bg-slate-50 dark:bg-slate-900 p-10 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 group hover:border-blue-200 dark:hover:border-blue-700 transition-all">
+              <div className="w-16 h-16 bg-blue-50 dark:bg-blue-950/50 rounded-2xl flex items-center justify-center text-blue-700 dark:text-blue-400 mb-8 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+                <Target size={28} />
               </div>
-              <h3 className="text-xl font-bold mb-3 text-slate-900">Skills Hub</h3>
-              <p className="text-slate-600 leading-relaxed">Identifiez les compétences rares et débloquez votre potentiel de gain.</p>
+              <h3 className="text-2xl font-black mb-4 text-slate-900 dark:text-white tracking-tight">Skills Hub</h3>
+              <p className="text-slate-500 dark:text-slate-400 font-medium leading-relaxed italic">Identifiez les compétences rares et débloquez votre potentiel de gain.</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Value for Everyone Section */}
-      <section className="py-24 bg-slate-50 px-4">
-        <div className="max-w-7xl mx-auto text-center mb-16">
-          <h2 className="text-4xl font-bold text-slate-900 mb-4 tracking-tight">{t('landing.valueTitle')}</h2>
-          <p className="text-slate-500 text-lg max-w-2xl mx-auto">{t('landing.valueSubtitle')}</p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {/* For Candidates Detailed */}
-          <div className="bg-white p-10 rounded-[2.5rem] shadow-sm border border-slate-100 flex flex-col h-full">
-            <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-6">
-              <Search size={24} />
-            </div>
-            <h3 className="text-2xl font-bold mb-4 text-slate-900">{t('landing.forCandidatesTitle')}</h3>
-            <p className="text-slate-500 mb-8 leading-relaxed">{t('landing.forCandidatesDesc')}</p>
-            <ul className="space-y-4 mb-10 flex-grow">
-              <li className="flex items-start">
-                <CheckCircle2 size={18} className="text-blue-600 mt-1 mr-3 shrink-0" />
-                <span className="text-slate-600">{t('landing.forCandidatesItem1')}</span>
-              </li>
-              <li className="flex items-start">
-                <CheckCircle2 size={18} className="text-blue-600 mt-1 mr-3 shrink-0" />
-                <span className="text-slate-600">{t('landing.forCandidatesItem2')}</span>
-              </li>
-              <li className="flex items-start">
-                <CheckCircle2 size={18} className="text-blue-600 mt-1 mr-3 shrink-0" />
-                <span className="text-slate-600">{t('landing.forCandidatesItem3')}</span>
-              </li>
-            </ul>
-            <button 
-              onClick={() => navigate('/onboarding/candidate')}
-              className="text-blue-600 font-bold flex items-center hover:translate-x-1 transition-transform"
-            >
-              {t('landing.forCandidatesCTA')} <ArrowRight size={18} className="ml-2" />
-            </button>
+      <section className="py-32 bg-slate-50 dark:bg-slate-900 px-6 transition-colors">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-24">
+            <h2 className="text-4xl md:text-6xl font-black text-slate-900 dark:text-white tracking-tighter mb-6">{t('landing.valueTitle')}</h2>
+            <p className="text-xl text-slate-500 dark:text-slate-400 font-medium italic max-w-2xl mx-auto">{t('landing.valueSubtitle')}</p>
           </div>
 
-          {/* For Recruiters Detailed */}
-          <div className="bg-white p-10 rounded-[2.5rem] shadow-sm border border-slate-100 flex flex-col h-full">
-            <div className="w-12 h-12 bg-slate-50 text-slate-900 rounded-2xl flex items-center justify-center mb-6">
-              <TrendingUp size={24} />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+            {/* For Candidates Detailed */}
+            <div className="bg-white dark:bg-slate-950 p-12 rounded-[3.5rem] shadow-xl border border-slate-100 dark:border-slate-800 flex flex-col transition-colors">
+              <div className="w-14 h-14 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-2xl flex items-center justify-center mb-8 shadow-sm">
+                <Search size={28} />
+              </div>
+              <h3 className="text-3xl font-black mb-6 text-slate-900 dark:text-white tracking-tight">{t('landing.forCandidatesTitle')}</h3>
+              <p className="text-slate-500 dark:text-slate-400 mb-10 leading-relaxed font-medium text-lg italic">{t('landing.forCandidatesDesc')}</p>
+              <ul className="space-y-6 mb-12 flex-grow">
+                <li className="flex items-center group">
+                  <CheckCircle2 size={20} className="text-blue-600 dark:text-blue-400 mr-4 shrink-0 transition-transform group-hover:scale-125" />
+                  <span className="text-slate-600 dark:text-slate-300 font-bold">{t('landing.forCandidatesItem1')}</span>
+                </li>
+                <li className="flex items-center group">
+                  <CheckCircle2 size={20} className="text-blue-600 dark:text-blue-400 mr-4 shrink-0 transition-transform group-hover:scale-125" />
+                  <span className="text-slate-600 dark:text-slate-300 font-bold">{t('landing.forCandidatesItem2')}</span>
+                </li>
+                <li className="flex items-center group">
+                  <CheckCircle2 size={20} className="text-blue-600 dark:text-blue-400 mr-4 shrink-0 transition-transform group-hover:scale-125" />
+                  <span className="text-slate-600 dark:text-slate-300 font-bold">{t('landing.forCandidatesItem3')}</span>
+                </li>
+              </ul>
+              <button 
+                onClick={() => navigate('/onboarding/candidate')}
+                className="text-blue-600 dark:text-blue-400 font-bold flex items-center hover:translate-x-1 transition-transform"
+              >
+                {t('landing.forCandidatesCTA')} <ArrowRight size={18} className="ml-2" />
+              </button>
             </div>
-            <h3 className="text-2xl font-bold mb-4 text-slate-900">{t('landing.forRecruitersTitle')}</h3>
-            <p className="text-slate-500 mb-8 leading-relaxed">{t('landing.forRecruitersDesc')}</p>
-            <ul className="space-y-4 mb-10 flex-grow">
-              <li className="flex items-start">
-                <CheckCircle2 size={18} className="text-slate-900 mt-1 mr-3 shrink-0" />
-                <span className="text-slate-600">{t('landing.forRecruitersItem1')}</span>
-              </li>
-              <li className="flex items-start">
-                <CheckCircle2 size={18} className="text-slate-900 mt-1 mr-3 shrink-0" />
-                <span className="text-slate-600">{t('landing.forRecruitersItem2')}</span>
-              </li>
-              <li className="flex items-start">
-                <CheckCircle2 size={18} className="text-slate-900 mt-1 mr-3 shrink-0" />
-                <span className="text-slate-600">{t('landing.forRecruitersItem3')}</span>
-              </li>
-            </ul>
-            <button 
-              onClick={() => navigate('/login')}
-              className="text-slate-900 font-bold flex items-center hover:translate-x-1 transition-transform"
-            >
-              {t('landing.forRecruitersCTA')} <ArrowRight size={18} className="ml-2" />
-            </button>
+
+            {/* For Recruiters Detailed */}
+            <div className="bg-slate-950 dark:bg-slate-800 p-12 rounded-[3.5rem] shadow-2xl text-white flex flex-col transition-colors">
+              <div className="w-14 h-14 bg-white/10 text-indigo-400 rounded-2xl flex items-center justify-center mb-8">
+                <TrendingUp size={28} />
+              </div>
+              <h3 className="text-3xl font-black mb-6 tracking-tight">{t('landing.forRecruitersTitle')}</h3>
+              <p className="text-slate-400 mb-10 leading-relaxed font-medium text-lg italic">{t('landing.forRecruitersDesc')}</p>
+              <ul className="space-y-6 mb-12 flex-grow">
+                <li className="flex items-center group">
+                  <CheckCircle2 size={20} className="text-indigo-400 mr-4 shrink-0 transition-transform group-hover:scale-125" />
+                  <span className="text-slate-200 font-bold">{t('landing.forRecruitersItem1')}</span>
+                </li>
+                <li className="flex items-center group">
+                  <CheckCircle2 size={20} className="text-indigo-400 mr-4 shrink-0 transition-transform group-hover:scale-125" />
+                  <span className="text-slate-200 font-bold">{t('landing.forRecruitersItem2')}</span>
+                </li>
+                <li className="flex items-center group">
+                  <CheckCircle2 size={20} className="text-indigo-400 mr-4 shrink-0 transition-transform group-hover:scale-125" />
+                  <span className="text-slate-200 font-bold">{t('landing.forRecruitersItem3')}</span>
+                </li>
+              </ul>
+              <button 
+                onClick={() => navigate('/login')}
+                className="text-white font-bold flex items-center hover:translate-x-1 transition-transform"
+              >
+                {t('landing.forRecruitersCTA')} <ArrowRight size={18} className="ml-2" />
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -198,11 +168,11 @@ const Landing: React.FC = () => {
       
       
             {/* FAQ Section */}
-      <section className="py-24 px-4 bg-white text-center overflow-hidden">
+      <section className="py-24 px-4 bg-white dark:bg-slate-950 text-center overflow-hidden">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-slate-900 mb-4 tracking-tight">{t('faq.title')}</h2>
-            <p className="text-slate-500 text-lg">{t('faq.subtitle')}</p>
+            <h2 className="text-4xl font-bold text-slate-900 dark:text-slate-100 mb-4 tracking-tight">{t('faq.title')}</h2>
+            <p className="text-slate-500 dark:text-slate-400 text-lg">{t('faq.subtitle')}</p>
           </div>
 
           <div className="space-y-4">
@@ -229,8 +199,8 @@ const Landing: React.FC = () => {
           </div>
 
           <div className="mt-12 text-center">
-            <p className="text-slate-600 mb-4">{t('faq.more')}</p>
-            <button className="text-blue-600 font-semibold hover:underline flex items-center justify-center mx-auto">
+            <p className="text-slate-600 dark:text-slate-400 mb-4">{t('faq.more')}</p>
+            <button className="text-blue-600 dark:text-blue-400 font-semibold hover:underline flex items-center justify-center mx-auto">
               {t('faq.viewAll')} <ArrowRight size={18} className="ml-2" />
             </button>
           </div>
@@ -241,6 +211,7 @@ const Landing: React.FC = () => {
   );
 };
 
+/* Interface pour FeatureCard
 interface FeatureCardProps {
   icon: React.ReactNode;
   title: string;
@@ -250,8 +221,9 @@ interface FeatureCardProps {
   footer?: string;
   footerColor?: string;
 }
+*/
 
-const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description, dark, tags, footer, footerColor }) => {
+/* const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description, dark, tags, footer, footerColor }) => {
   return (
     <div className={`${dark ? 'bg-slate-900 text-white' : 'bg-white text-slate-900 border border-slate-100 shadow-sm'} p-10 rounded-[2.5rem] flex flex-col h-full min-h-[340px]`}>
       <div className={`w-12 h-12 ${dark ? 'bg-slate-800' : 'bg-blue-50'} rounded-2xl flex items-center justify-center mb-6 shrink-0`}>
@@ -281,11 +253,6 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description, dar
       </div>}
     </div>
   );
-};
+}; */
 
 export default Landing;
-/*
-<section className="py-24 px-4 bg-white text-center overflow-hidden">
-</section>
-
-*/

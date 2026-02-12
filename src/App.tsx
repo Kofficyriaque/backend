@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
@@ -14,10 +14,21 @@ import About from './pages/About';
 
 
 const App: React.FC = () => {
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    return (localStorage.getItem('theme') as 'light' | 'dark') || 'light';
+  });
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+    document.documentElement.classList.toggle('dark', newTheme === 'dark');
+  };
+
   return (
     <BrowserRouter>
-      <div className="flex flex-col min-h-screen">
-        <Navbar />
+      <div className={`flex flex-col min-h-screen ${theme === 'dark' ? 'dark' : ''}`}>
+        <Navbar theme={theme} toggleTheme={toggleTheme} />
         <main className="flex-grow pt-16">
           <Routes>
             <Route path="/" element={<Landing />} />

@@ -83,22 +83,22 @@ const CandidateOnboarding: React.FC = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-64px)] bg-slate-50 flex flex-col items-center py-12 px-4">
+    <div className="min-h-[calc(100vh-64px)] bg-slate-50 dark:bg-slate-900 flex flex-col items-center py-12 px-4">
       {/* Progress Bar */}
       <div className="max-w-2xl w-full mb-12">
-        <div className="flex justify-between text-xs font-bold text-slate-400 uppercase tracking-widest mb-4 px-2">
+        <div className="flex justify-between text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4 px-2">
           <span>Profile</span>
           <span>Expertise</span>
           <span>Analysis</span>
         </div>
-        <div className="h-2 w-full bg-slate-200 rounded-full overflow-hidden">
+        <div className="h-2 w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
           <motion.div 
             initial={{ width: '33.33%' }}
             animate={{ width: `${(step / 3) * 100}%` }}
-            className="h-full bg-blue-600"
+            className="h-full bg-blue-600 dark:bg-blue-500"
           />
         </div>
-        <p className="text-center mt-4 text-sm font-semibold text-slate-500">Step {step} of 3</p>
+        <p className="text-center mt-4 text-sm font-semibold text-slate-500 dark:text-slate-400">Step {step} of 3</p>
       </div>
 
       <div className="max-w-2xl w-full">
@@ -109,13 +109,13 @@ const CandidateOnboarding: React.FC = () => {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
-              className="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100"
+              className="bg-white dark:bg-slate-950 p-8 md:p-12 rounded-[2.5rem] shadow-xl shadow-slate-200/50 dark:shadow-slate-900/50 border border-slate-100 dark:border-slate-800"
             >
               {step === 1 && (
                 <div className="space-y-8">
                   <div>
-                    <h2 className="text-3xl font-bold text-slate-900 mb-2">Tell us about your role.</h2>
-                    <p className="text-slate-500">We use this to anchor your profile against global market data.</p>
+                    <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-2">Tell us about your role.</h2>
+                    <p className="text-slate-500 dark:text-slate-400">We use this to anchor your profile against global market data.</p>
                   </div>
                   
                   <div className="space-y-6">
@@ -258,7 +258,7 @@ const CandidateOnboarding: React.FC = () => {
 
                   <button 
                     onClick={runAnalysis}
-                    className="w-full bg-blue-600 text-white py-6 rounded-[2rem] font-bold text-xl hover:bg-blue-700 transition-all shadow-xl shadow-blue-200 flex items-center justify-center group"
+                    className="w-full bg-blue-600 text-white py-6 rounded-[2rem] font-bold text-xl hover:bg-blue-700 transition-all shadow-xl dark:shadow-blue-950 flex items-center justify-center group"
                   >
                     Launch PrediSalaire AI <Sparkles size={24} className="ml-3 group-hover:rotate-12 transition-transform" />
                   </button>
@@ -336,7 +336,7 @@ const CandidateOnboarding: React.FC = () => {
                 <div className="pt-6 flex flex-col sm:flex-row gap-4">
                   <button 
                     onClick={() => navigate('/')}
-                    className="flex-1 bg-blue-600 text-white py-5 rounded-2xl font-bold text-lg hover:bg-blue-700 transition-all shadow-xl shadow-blue-200"
+                    className="flex-1 bg-blue-600 text-white py-5 rounded-2xl font-bold text-lg hover:bg-blue-700 transition-all shadow-xl dark:shadow-blue-950"
                   >
                     View Matching Offers
                   </button>
