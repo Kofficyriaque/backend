@@ -59,5 +59,3 @@ class Database:
         with cls.get_cursor() as (cursor, _):
             cursor.execute(query, params)
             return cursor.fetchall()
-        
-print(DB_CONFIG)
