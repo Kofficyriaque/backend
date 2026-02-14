@@ -1,19 +1,19 @@
 from mysql.connector import pooling
 from contextlib import contextmanager
-from dotenv import dotenv_values
-
-config = dotenv_values(".env")
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 DB_CONFIG = {
-    "host":config["host"],
-	"port":int(config["port"]),
-	"user":config["user"],
-	"password":config["password"],
-	"database":config["database"],
-    "charset":config["charset"],
-    "collation":config["collation"],
-    "ssl_disabled":bool(config["ssl_disabled"]),
-    "ssl_verify_cert":bool(config["ssl_verify_cert"])
+    "host":os.getenv("host"),
+	"port":int(os.getenv("port")),
+	"user":os.getenv("user"),
+	"password":os.getenv("password"),
+	"database":os.getenv("database"),
+    "charset":os.getenv("charset"),
+    "collation":os.getenv("collation"),
+    "ssl_disabled":bool(os.getenv("ssl_disabled")),
+    "ssl_verify_cert":bool(os.getenv("ssl_verify_cert"))
 } #charger configuration de la database
 
 class Database:
@@ -59,3 +59,5 @@ class Database:
         with cls.get_cursor() as (cursor, _):
             cursor.execute(query, params)
             return cursor.fetchall()
+        
+print(DB_CONFIG)
