@@ -76,6 +76,7 @@ def register(data: RegisterRequest):
         prenom=data.prenom,
         email=data.email,
         password=data.password,
+        location=data.location,
         role=data.role
     )
     token = create_access_token(user["idUtilisateur"])

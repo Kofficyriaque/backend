@@ -84,7 +84,7 @@ def register_user(nom: str, prenom: str, email: str, password: str, role: str, l
     user_id = Database.execute(
         """INSERT INTO Utilisateur (nom, prenom, email, password, statut, location, idTypeCompte)
            VALUES (%s, %s, %s, %s, %s, %s,%s)""",
-        (nom, prenom, email,location, hashed, "active", type_compte["idTypeCompte"])
+        (nom, prenom, email, hashed, "active", location, type_compte["idTypeCompte"])
     )
     
     return {
@@ -92,8 +92,8 @@ def register_user(nom: str, prenom: str, email: str, password: str, role: str, l
         "nom": nom,
         "prenom": prenom,
         "email": email,
-        "location":location,
         "statut": "active",
+        "location":location,
         "role": role
     }
 
