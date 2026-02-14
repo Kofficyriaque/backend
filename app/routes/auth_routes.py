@@ -15,6 +15,7 @@ class RegisterRequest(BaseModel):
     prenom: str
     email: EmailStr
     password: str
+    location: str
     role: str
 
 
@@ -28,6 +29,7 @@ class UserResponse(BaseModel):
     nom: str
     prenom: str
     email: str
+    location: str
     statut: Optional[str]
     role: Optional[str]
 

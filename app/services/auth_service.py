@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 import jwt
+import pytz
 import hashlib
 import random
 import string
@@ -19,21 +20,23 @@ security = HTTPBearer()
 reset_codes = {}
 verify_codes = {}
 
+tz = pytz.timezone("Europe/Paris")
 
+#hashage du mot de passe
 def hash_password(password: str) -> str:
     return hashlib.sha256(password.encode()).hexdigest()
 
-
+#vérification mot de passe
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     return hash_password(plain_password) == hashed_password
 
-
+#creation de token
 def create_access_token(user_id: int) -> str:
-    expire = datetime.utcnow() + timedelta(hours=JWT_EXPIRE_HOURS)
+    expire = datetime.now(tz) + timedelta(hours=JWT_EXPIRE_HOURS)
     payload = {"sub": str(user_id), "exp": expire}
     return jwt.encode(payload, JWT_SECRET, algorithm=JWT_ALGORITHM)
 
-
+#decode du token
 def decode_token(token: str) -> dict:
     try:
         return jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
@@ -42,7 +45,7 @@ def decode_token(token: str) -> dict:
     except jwt.InvalidTokenError:
         raise HTTPException(status_code=401, detail="Invalid token")
 
-
+#récupérer l'utilisateur courant
 def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)) -> dict:
     payload = decode_token(credentials.credentials)
     user_id = payload.get("sub")
@@ -51,7 +54,7 @@ def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(securit
         raise HTTPException(status_code=401, detail="Invalid token")
     
     user = Database.fetch_one(
-        """SELECT u.idUtilisateur, u.nom, u.prenom, u.email, u.statut, t.libelle as role
+        """SELECT u.idUtilisateur, u.nom, u.prenom, u.email, u.statut,u.location,u.role t.libelle as role
            FROM Utilisateur u
            LEFT JOIN TypeDeCompte t ON u.idTypeCompte = t.idTypeCompte
            WHERE u.idUtilisateur = %s""",
@@ -63,12 +66,12 @@ def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(securit
     
     return user
 
-
+#génération du code random
 def generate_code() -> str:
     return ''.join(random.choices(string.digits, k=6))
 
-
-def register_user(nom: str, prenom: str, email: str, password: str, role: str) -> dict:
+# enregistrement du mot de passe
+def register_user(nom: str, prenom: str, email: str, password: str, role: str, location:str) -> dict:
     existing = Database.fetch_one("SELECT idUtilisateur FROM Utilisateur WHERE email = %s", (email,))
     if existing:
         raise HTTPException(status_code=400, detail="Email already registered")
@@ -79,9 +82,9 @@ def register_user(nom: str, prenom: str, email: str, password: str, role: str) -
     
     hashed = hash_password(password)
     user_id = Database.execute(
-        """INSERT INTO Utilisateur (nom, prenom, email, password, statut, idTypeCompte)
-           VALUES (%s, %s, %s, %s, %s, %s)""",
-        (nom, prenom, email, hashed, "active", type_compte["idTypeCompte"])
+        """INSERT INTO Utilisateur (nom, prenom, email, password, statut, location, idTypeCompte)
+           VALUES (%s, %s, %s, %s, %s, %s,%s)""",
+        (nom, prenom, email,location, hashed, "active", type_compte["idTypeCompte"])
     )
     
     return {
@@ -89,6 +92,7 @@ def register_user(nom: str, prenom: str, email: str, password: str, role: str) -
         "nom": nom,
         "prenom": prenom,
         "email": email,
+        "location":location,
         "statut": "active",
         "role": role
     }
@@ -96,7 +100,7 @@ def register_user(nom: str, prenom: str, email: str, password: str, role: str) -
 
 def authenticate_user(email: str, password: str) -> dict:
     user = Database.fetch_one(
-        """SELECT u.idUtilisateur, u.nom, u.prenom, u.email, u.password, u.statut, t.libelle as role
+        """SELECT u.idUtilisateur, u.nom, u.prenom, u.email, u.password, u.statut,u.location, t.libelle as role
            FROM Utilisateur u
            LEFT JOIN TypeDeCompte t ON u.idTypeCompte = t.idTypeCompte
            WHERE u.email = %s""",
@@ -112,6 +116,7 @@ def authenticate_user(email: str, password: str) -> dict:
         "prenom": user["prenom"],
         "email": user["email"],
         "statut": user["statut"],
+        "location": user["location"],
         "role": user["role"]
     }
 
@@ -122,7 +127,7 @@ def update_profile(user_id: int, nom: str, prenom: str) -> dict:
         (nom, prenom, user_id)
     )
     return Database.fetch_one(
-        """SELECT u.idUtilisateur, u.nom, u.prenom, u.email, u.statut, t.libelle as role
+        """SELECT u.idUtilisateur, u.nom, u.prenom, u.email, u.statut,u.location, t.libelle as role
            FROM Utilisateur u
            LEFT JOIN TypeDeCompte t ON u.idTypeCompte = t.idTypeCompte
            WHERE u.idUtilisateur = %s""",
