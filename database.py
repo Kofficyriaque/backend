@@ -5,15 +5,15 @@ from dotenv import load_dotenv
 load_dotenv()
 
 DB_CONFIG = {
-    "HOST":os.getenv("HOST"),
-	"port":int(os.getenv("PORT")),
-	"user":os.getenv("USER"),
-	"password":os.getenv("PASSWORD"),
-	"database":os.getenv("DATABASE"),
-    "charset":os.getenv("CHARSET"),
-    "collation":os.getenv("COLLATION"),
-    "ssl_disabled":bool(os.getenv("SSL_DISABLED")),
-    "ssl_verify_cert":bool(os.getenv("SSL_VERIFY_CERT"))
+    "host":os.getenv("host"),
+	"port":int(os.getenv("port")),
+	"user":os.getenv("user"),
+	"password":os.getenv("password"),
+	"database":os.getenv("database"),
+    "charset":os.getenv("charset"),
+    "collation":os.getenv("collation"),
+    "ssl_disabled":bool(os.getenv("ssl_disabled")),
+    "ssl_verify_cert":bool(os.getenv("ssl_verify_cert"))
 } #charger configuration de la database
 
 class Database:
