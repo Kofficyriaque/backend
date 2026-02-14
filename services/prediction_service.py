@@ -31,7 +31,6 @@ def _get_model_path():
 
 def load_model():
     global _model, _model_loaded
-    
     if _model_loaded:
         return _model
     

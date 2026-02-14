@@ -12,7 +12,7 @@ app = FastAPI(
 
 origins = [
     "http://localhost:5173",
-    "https://howmuchia.netlify.app",
+    "https://howmuchia.netlify.app/",
     "*"
 ]
 

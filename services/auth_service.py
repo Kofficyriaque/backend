@@ -54,8 +54,8 @@ def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(securit
         raise HTTPException(status_code=401, detail="Invalid token")
     
     user = Database.fetch_one(
-        """SELECT u.idUtilisateur, u.nom, u.prenom, u.email, u.statut,u.location,u.role t.libelle as role
-           FROM Utilisateur u
+        """SELECT u.idUtilisateur, u.nom, u.prenom, u.email, u.statut,u.location,u.role, t.libelle as role
+           FROM Utilisateur as u
            LEFT JOIN TypeDeCompte t ON u.idTypeCompte = t.idTypeCompte
            WHERE u.idUtilisateur = %s""",
         (int(user_id),)
