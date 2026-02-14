@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 DB_CONFIG = {
-    "host":os.getenv("HOST"),
+    "HOST":os.getenv("HOST"),
 	"port":int(os.getenv("PORT")),
 	"user":os.getenv("USER"),
 	"password":os.getenv("PASSWORD"),
