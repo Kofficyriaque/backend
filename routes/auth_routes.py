@@ -17,7 +17,7 @@ class RegisterRequest(BaseModel):
     password: str
     location: str
     role: str
-
+    date_creation:str
 
 class LoginRequest(BaseModel):
     email: EmailStr
@@ -30,13 +30,12 @@ class UserResponse(BaseModel):
     prenom: str
     email: str
     location: str
-    statut: Optional[str]
     role: Optional[str]
+    date_creation:str
 
 
 class TokenResponse(BaseModel):
     access_token: str
-    token_type: str = "bearer"
     user: UserResponse
 
 
@@ -77,7 +76,8 @@ def register(data: RegisterRequest):
         email=data.email,
         password=data.password,
         location=data.location,
-        role=data.role
+        role=data.role,
+        date_creation=data.date_creation
     )
     token = create_access_token(user["idUtilisateur"])
     return TokenResponse(access_token=token, user=UserResponse(**user))
@@ -87,9 +87,9 @@ def register(data: RegisterRequest):
 def login(data: LoginRequest):
     user = authenticate_user(email=data.email, password=data.password)
     token = create_access_token(user["idUtilisateur"])
-    return TokenResponse(access_token=token, user=UserResponse(**user))
+    return TokenResponse(access_token=token, user=user)
 
-
+#pas nécessaire
 @router.get("/me", response_model=UserResponse)
 def get_me(current_user: dict = Depends(get_current_user)):
     return UserResponse(**current_user)

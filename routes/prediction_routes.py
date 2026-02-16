@@ -69,10 +69,9 @@ def predict(data: PredictionRequest, current_user: dict = Depends(get_current_us
 @router.get("/history")
 def get_history(current_user: dict = Depends(get_current_user)):
     return Database.fetch_all(
-        """SELECT idHistorique, salaire_predit, date_prediction
-           FROM Historique
+        """SELECT *
+           FROM Historiques_users
            WHERE idUtilisateur = %s
-           ORDER BY date_prediction DESC
-           LIMIT 10""",
+           ORDER BY date_predit DESC""",
         (current_user["idUtilisateur"],)
     )

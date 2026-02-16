@@ -54,7 +54,7 @@ def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(securit
         raise HTTPException(status_code=401, detail="Invalid token")
     
     user = Database.fetch_one(
-        """SELECT u.idUtilisateur, u.nom, u.prenom, u.email, u.statut,u.location, t.libelle as role
+        """SELECT u.idUtilisateur, u.nom, u.prenom, u.email, u.statut,u.location,u.date_creation, t.libelle as role
            FROM Utilisateur as u
            LEFT JOIN TypeDeCompte t ON u.idTypeCompte = t.idTypeCompte
            WHERE u.idUtilisateur = %s""",
@@ -71,7 +71,7 @@ def generate_code() -> str:
     return ''.join(random.choices(string.digits, k=6))
 
 # enregistrement du mot de passe
-def register_user(nom: str, prenom: str, email: str, password: str, role: str, location:str) -> dict:
+def register_user(nom: str, prenom: str, email: str, password: str, role: str, location:str,date_creation:str) -> dict:
     existing = Database.fetch_one("SELECT idUtilisateur FROM Utilisateur WHERE email = %s", (email,))
     if existing:
         raise HTTPException(status_code=400, detail="Email already registered")
@@ -82,9 +82,9 @@ def register_user(nom: str, prenom: str, email: str, password: str, role: str, l
     
     hashed = hash_password(password)
     user_id = Database.execute(
-        """INSERT INTO Utilisateur (nom, prenom, email, password, statut, location, idTypeCompte)
-           VALUES (%s, %s, %s, %s, %s, %s,%s)""",
-        (nom, prenom, email, hashed, "active", location, type_compte["idTypeCompte"])
+        """INSERT INTO Utilisateur (nom, prenom, email, password, statut, location,date_creation,idTypeCompte)
+           VALUES (%s, %s, %s, %s, %s, %s,%s,%s)""",
+        (nom, prenom, email, hashed, "actif", location,date_creation, type_compte["idTypeCompte"])
     )
     
     return {
@@ -92,9 +92,9 @@ def register_user(nom: str, prenom: str, email: str, password: str, role: str, l
         "nom": nom,
         "prenom": prenom,
         "email": email,
-        "statut": "active",
         "location":location,
-        "role": role
+        "role": role,
+        "date_creation":date_creation
     }
 
 
@@ -110,21 +110,13 @@ def authenticate_user(email: str, password: str) -> dict:
     if not user or not verify_password(password, user["password"]):
         raise HTTPException(status_code=401, detail="Invalid email or password")
     
-    return {
-        "idUtilisateur": user["idUtilisateur"],
-        "nom": user["nom"],
-        "prenom": user["prenom"],
-        "email": user["email"],
-        "statut": user["statut"],
-        "location": user["location"],
-        "role": user["role"]
-    }
+    return True
 
 
-def update_profile(user_id: int, nom: str, prenom: str) -> dict:
+def update_profile(user_id: int, nom: str, prenom: str,loction:str) -> dict:
     Database.execute(
-        "UPDATE Utilisateur SET nom = %s, prenom = %s WHERE idUtilisateur = %s",
-        (nom, prenom, user_id)
+        "UPDATE Utilisateur SET nom = %s, prenom = %s, location = %s WHERE idUtilisateur = %s",
+        (nom, prenom, user_id,loction)
     )
     return Database.fetch_one(
         """SELECT u.idUtilisateur, u.nom, u.prenom, u.email, u.statut,u.location, t.libelle as role
