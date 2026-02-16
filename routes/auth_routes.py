@@ -83,11 +83,10 @@ def register(data: RegisterRequest):
     return TokenResponse(access_token=token, user=UserResponse(**user))
 
 
-@router.post("/login", response_model=TokenResponse)
+@router.post("/login", response_model=UserResponse)
 def login(data: LoginRequest):
     user = authenticate_user(email=data.email, password=data.password)
-    token = create_access_token(user["idUtilisateur"])
-    return TokenResponse(access_token=token, user=user)
+    return user
 
 #pas nécessaire
 @router.get("/me", response_model=UserResponse)

@@ -100,7 +100,7 @@ def register_user(nom: str, prenom: str, email: str, password: str, role: str, l
 
 def authenticate_user(email: str, password: str) -> dict:
     user = Database.fetch_one(
-        """SELECT u.idUtilisateur, u.nom, u.prenom, u.email, u.password, u.statut,u.location, t.libelle as role
+        """SELECT u.idUtilisateur, u.nom, u.prenom, u.email, u.password, u.statut,u.location,u.date_creation, t.libelle as role
            FROM Utilisateur u
            LEFT JOIN TypeDeCompte t ON u.idTypeCompte = t.idTypeCompte
            WHERE u.email = %s""",
@@ -110,7 +110,7 @@ def authenticate_user(email: str, password: str) -> dict:
     if not user or not verify_password(password, user["password"]):
         raise HTTPException(status_code=401, detail="Invalid email or password")
     
-    return True
+    return user
 
 
 def update_profile(user_id: int, nom: str, prenom: str,loction:str) -> dict:
