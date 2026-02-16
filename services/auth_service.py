@@ -110,8 +110,16 @@ def authenticate_user(email: str, password: str) -> dict:
     if not user or not verify_password(password, user["password"]):
         raise HTTPException(status_code=401, detail="Invalid email or password")
     
-    return user
-
+    return {
+        "idUtilisateur": user["idUtilisateur"],
+        "nom": user["nom"],
+        "prenom": user["prenom"],
+        "email": user["email"],
+        "statut": user["statut"],
+        "role": user["role"],
+        "location":user["location"],
+        "date_creation":user["date_creation"]
+    }
 
 def update_profile(user_id: int, nom: str, prenom: str,loction:str) -> dict:
     Database.execute(

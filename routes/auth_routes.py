@@ -19,6 +19,8 @@ class RegisterRequest(BaseModel):
     role: str
     date_creation:str
 
+
+
 class LoginRequest(BaseModel):
     email: EmailStr
     password: str
@@ -83,17 +85,18 @@ def register(data: RegisterRequest):
     return TokenResponse(access_token=token, user=UserResponse(**user))
 
 
-@router.post("/login", response_model=UserResponse)
+@router.post("/login", response_model=TokenResponse)
 def login(data: LoginRequest):
     user = authenticate_user(email=data.email, password=data.password)
-    return user
+    token = create_access_token(user["idUtilisateur"])
+    return TokenResponse(access_token=token, user=UserResponse(**user))
 
 #pas nécessaire
 @router.get("/me", response_model=UserResponse)
 def get_me(current_user: dict = Depends(get_current_user)):
     return UserResponse(**current_user)
 
-
+#pas necessaire
 @router.put("/profile", response_model=UserResponse)
 def update_user_profile(data: UpdateProfileRequest, current_user: dict = Depends(get_current_user)):
     user = update_profile(current_user["idUtilisateur"], data.nom, data.prenom)
