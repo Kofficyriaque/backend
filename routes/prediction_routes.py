@@ -47,9 +47,9 @@ def predict(data: PredictionRequest, current_user: dict = Depends(get_current_us
     
     try:
         Database.execute(
-            """ INSERT INTO Historique(salaire_predit,salaire_min,salaire_mensuel,niveau_experience, date_predit,description,competences,region, idUtilisateur)
-            VALUES (%s, %s, %s,%s, %s, %s,%s, %s, %s)""",
-            (result["salaire_predit"],result["salaire_min"],result["salaire_mensuel"], niveau_experience,datetime.now().strftime("%d/%m/%Y %H:%M:%S"),data.description,",".join(data.competences),data.region,current_user["idUtilisateur"])
+            """ INSERT INTO Historique(salaire_predit,salaire_min,salaire_mensuel,niveau_experience, date_predit,description,competences,region, idUtilisateur,titre)
+            VALUES (%s, %s, %s,%s, %s, %s,%s, %s, %s, %s)""",
+            (result["salaire_predit"],result["salaire_min"],result["salaire_mensuel"], niveau_experience,datetime.now().strftime("%d/%m/%Y %H:%M:%S"),data.description,",".join(data.competences),data.region,current_user["idUtilisateur"], data.titre)
         )
     except Exception as e:
         print("ERREUR SQL :", e)
