@@ -28,6 +28,16 @@ class PredictionResponse(BaseModel):
     niveau_experience: Optional[str]
     model_used: bool = False
 
+class historique (BaseModel):
+    salaire_predit: int
+    salaire_min : int
+    salaire_mensuel: int  
+    niveau_experience: str
+    date_predit: str
+    description: str
+    competences: List(str)
+    region: str
+    titre: str
 
 @router.post("/salary", response_model=PredictionResponse)
 def predict(data: PredictionRequest, current_user: dict = Depends(get_current_user)):
@@ -75,3 +85,15 @@ def get_history(current_user: dict = Depends(get_current_user)):
            ORDER BY date_predit DESC""",
         (current_user["idUtilisateur"],)
     )
+
+@router.post("/historique")
+def post_history(data: historique,current_user: dict = Depends(get_current_user)):
+    try:
+        Database.execute(
+            """ INSERT INTO Historique(salaire_predit,salaire_min,salaire_mensuel,niveau_experience, date_predit,description,competences,region, idUtilisateur,titre)
+            VALUES (%s, %s, %s,%s, %s, %s,%s, %s, %s, %s)""",
+            (data.salaire_predit,data.salaire_min,data.salaire_mensuel, data.niveau_experience,data.date_predit,data.description,",".join(data.competences),data.region,current_user["idUtilisateur"], data.titre)
+        )
+    except Exception as e:
+        print("ERREUR SQL :", e)
+    
