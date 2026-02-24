@@ -92,7 +92,7 @@ def post_history(data: historique,current_user: dict = Depends(get_current_user)
         Database.execute(
             """ INSERT INTO Historique(salaire_predit,salaire_min,salaire_mensuel,niveau_experience, date_predit,description,competences,region, idUtilisateur,titre)
             VALUES (%s, %s, %s,%s, %s, %s,%s, %s, %s, %s)""",
-            (data.salaire_predit,data.salaire_min,data.salaire_mensuel, data.niveau_experience,data.date_predit,data.description,",".join(data.competences),data.region,current_user["idUtilisateur"], data.titre)
+            (data.salaire_predit,data.salaire_min,data.salaire_mensuel, data.niveau_experience,data.date_predit,data.description,data.competences,data.region,current_user["idUtilisateur"], data.titre)
         )
     except Exception as e:
         print("ERREUR SQL :", e)
