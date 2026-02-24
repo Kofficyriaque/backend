@@ -35,7 +35,7 @@ class historique (BaseModel):
     niveau_experience: str
     date_predit: str
     description: str
-    competences: List(str)
+    competences: List[str]
     region: str
     titre: str
 
