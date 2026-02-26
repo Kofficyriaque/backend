@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from pydantic import BaseModel, EmailStr
 from typing import Optional
 from services.auth_service import (
-    register_user, authenticate_user, create_access_token, get_current_user,
+    register_user, authenticate_user, create_access_token, get_current_user, renew_token,
     update_profile, change_password, generate_reset_code, reset_password, 
     change_role, send_verification_code, verify_email_code
 )
@@ -137,4 +137,3 @@ def send_verification(data: ForgotPasswordRequest):
 def verify_email(data: VerifyEmailRequest):
     verify_email_code(data.email, data.code)
     return {"message": "Email verified successfully"}
-
