@@ -41,6 +41,7 @@ class historique (BaseModel):
     titre: str
 
 class feedback(BaseModel):
+    dates:str
     commentaire: str
     note:str
 
@@ -102,10 +103,11 @@ def post_history(data: historique,current_user: dict = Depends(get_current_user)
     except Exception as e:
         print("ERREUR SQL :", e)
 
+
 @router.post("/feedback")
 def post_feedback(data:feedback,current_user: dict= Depends(get_current_user)):
     try:
-        send_feedback_to_sheet(current_user["nom"],current_user["email"],data.commentaire,data.note)
+        send_feedback_to_sheet(data.dates,current_user["nom"],current_user["email"],data.commentaire,data.note)
         return "validé"
     except Exception as e:
         print("ERREUR FeedBack :", e)

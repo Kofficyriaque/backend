@@ -29,10 +29,9 @@ SHEET_NAME = "Feedbacks"  # Nom du Google Sheet
 sheet = gc.open(SHEET_NAME).sheet1  # On prend la première feuille
 
 # --- FONCTION D'ENVOI DE FEEDBACK ---
-def send_feedback_to_sheet(user_name, user_email, feedback_text,feedback_note):
+def send_feedback_to_sheet(dates,user_name, user_email, feedback_text,feedback_note):
     """
     Ajoute un feedback dans la Google Sheet.
     """
-    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    row = [timestamp, user_name, user_email, feedback_text,f"{feedback_note}/5"]
+    row = [dates, user_name, user_email, feedback_text,f"{feedback_note}/5"]
     sheet.append_row(row)
