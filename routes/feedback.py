@@ -8,7 +8,7 @@ import json
 
 # --- CONFIGURATION GOOGLE SHEETS ---
 # Définir la portée de l'API
-load_dotenv()
+# load_dotenv()
 
 SCOPES = [
     "https://www.googleapis.com/auth/spreadsheets",
