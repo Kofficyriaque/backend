@@ -8,3 +8,5 @@ scikit-learn
 xgboost
 python-dotenv
 pytz
+gspread 
+oauth2client

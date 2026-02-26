@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 from typing import Optional, List
+from routes.feedback import send_feedback_to_sheet
 from services.auth_service import get_current_user
 from services.prediction_service import predict_salary, extract_competences_from_text, get_experience_level
 from database import Database
@@ -38,6 +39,10 @@ class historique (BaseModel):
     competences: str
     region: str
     titre: str
+
+class feedback(BaseModel):
+    commentaire: str
+    note:str
 
 @router.post("/salary", response_model=PredictionResponse)
 def predict(data: PredictionRequest, current_user: dict = Depends(get_current_user)):
@@ -96,4 +101,8 @@ def post_history(data: historique,current_user: dict = Depends(get_current_user)
         )
     except Exception as e:
         print("ERREUR SQL :", e)
+
+@router.post("/feedback")
+def get_feedback(data:feedback,current_user: dict= Depends(get_current_user)):
+    send_feedback_to_sheet(current_user["nom"],current_user["email"],data.commentaire,data.note)
     
