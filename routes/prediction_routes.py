@@ -105,4 +105,5 @@ def post_history(data: historique,current_user: dict = Depends(get_current_user)
 @router.post("/feedback")
 def get_feedback(data:feedback,current_user: dict= Depends(get_current_user)):
     send_feedback_to_sheet(current_user["nom"],current_user["email"],data.commentaire,data.note)
+    return "validé"
     

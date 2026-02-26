@@ -34,5 +34,5 @@ def send_feedback_to_sheet(user_name, user_email, feedback_text,feedback_note):
     Ajoute un feedback dans la Google Sheet.
     """
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    row = [timestamp, user_name, user_email, feedback_text,feedback_note]
+    row = [timestamp, user_name, user_email, feedback_text,f"{feedback_note}/5"]
     sheet.append_row(row)

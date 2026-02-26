@@ -9,4 +9,4 @@ xgboost
 python-dotenv
 pytz
 gspread 
-oauth2client
+google-auth 
