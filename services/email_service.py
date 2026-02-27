@@ -1,9 +1,9 @@
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import os 
-load_dotenv(".env.secret") # Charger les variables d'environnements
+# load_dotenv(".env.secret") # Charger les variables d'environnements
 
 SMTP_HOST = os.getenv("SMTP_HOST")
 SMTP_PORT =int(os.getenv("SMTP_PORT"))
@@ -11,7 +11,8 @@ SMTP_EMAIL = os.getenv("SMTP_EMAIL")
 SMTP_PASSWORD = os.getenv("SMTP_PASSWORD")
 
 def send_otp_email(to_email: str, code: str, purpose: str = "reset") -> bool:
-   
+    print("EMAIL FUNCTION STARTED")
+    print(SMTP_EMAIL)
     try:
         if purpose == "reset":
             subject = "Market Visualizer - Code de réinitialisation"
