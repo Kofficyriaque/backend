@@ -60,7 +60,7 @@ def send_otp_email(to_email: str, code: str, purpose: str = "reset") -> bool:
         msg["To"] = to_email
 
         msg.attach(MIMEText(body, "html"))
-
+        print(SMTP_PASSWORD)
         with smtplib.SMTP(SMTP_HOST, SMTP_PORT) as server:
             server.starttls()
             server.login(SMTP_EMAIL, SMTP_PASSWORD)
